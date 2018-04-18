@@ -1,0 +1,33 @@
+{
+  "name": "express-guard",
+  "version": "1.0.0",
+  "description": "A powerful, operation based, access and permission middleware for Express.",
+  "main": "./lib",
+  "scripts": {
+    "eslint": "eslint --cache --fix --format codeframe .",
+    "test": "run-s eslint",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinpiac/express-guard.git"
+  },
+  "keywords": [
+    "express-acl",
+    "acl-node",
+    "permission-middleware",
+    "Expressjs",
+    "permissions"
+  ],
+  "author": "Kevin Piacentini <kevinpiac@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinpiac/express-guard/issues"
+  },
+  "homepage": "https://github.com/kevinpiac/express-guard#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "npm-run-all": "^4.1.2"
+  }
+}
