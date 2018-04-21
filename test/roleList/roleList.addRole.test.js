@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const errors = require('../../lib/errors');
 const RoleList = require('../../lib/RoleList');
 const Role = require('../../lib/Role');
 

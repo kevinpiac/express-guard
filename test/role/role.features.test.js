@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const errors = require('../../lib/errors');
 const Role = require('../../lib/Role');
 
 describe('test role features', () => {
@@ -13,12 +12,12 @@ describe('test role features', () => {
     const role = new Role('testRole');
     expect(() => {
       role.features = 1111;
-    }).to.throw(TypeError, errors.ROLE_FEATURES_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_FEATURES_TYPE_ERROR);
     expect(() => {
       role.features = () => true;
-    }).to.throw(TypeError, errors.ROLE_FEATURES_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_FEATURES_TYPE_ERROR);
     expect(() => {
       role.features = {};
-    }).to.throw(TypeError, errors.ROLE_FEATURES_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_FEATURES_TYPE_ERROR);
   });
 });

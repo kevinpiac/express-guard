@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const errors = require('../../lib/errors');
 const Role = require('../../lib/Role');
 
 describe('test role name', () => {
@@ -13,27 +12,27 @@ describe('test role name', () => {
     const role = new Role('testRole');
     expect(() => {
       role.name = 1111;
-    }).to.throw(TypeError, errors.ROLE_NAME_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_NAME_TYPE_ERROR);
     expect(() => {
       role.name = () => true;
-    }).to.throw(TypeError, errors.ROLE_NAME_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_NAME_TYPE_ERROR);
     expect(() => {
       role.name = [];
-    }).to.throw(TypeError, errors.ROLE_NAME_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_NAME_TYPE_ERROR);
     expect(() => {
       role.name = {};
-    }).to.throw(TypeError, errors.ROLE_NAME_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_NAME_TYPE_ERROR);
   });
   it('should throw Error ROLE_NAME_REQUIRED', () => {
     const role = new Role('testRole');
     expect(() => {
       role.name = '';
-    }).to.throw(Error, errors.ROLE_NAME_REQUIRED);
+    }).to.throw(Error, Role.errors.ROLE_NAME_REQUIRED);
     expect(() => {
       role.name = null;
-    }).to.throw(Error, errors.ROLE_NAME_REQUIRED);
+    }).to.throw(Error, Role.errors.ROLE_NAME_REQUIRED);
     expect(() => {
       role.name = undefined;
-    }).to.throw(Error, errors.ROLE_NAME_REQUIRED);
+    }).to.throw(Error, Role.errors.ROLE_NAME_REQUIRED);
   });
 });

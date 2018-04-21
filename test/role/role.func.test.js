@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const errors = require('../../lib/errors');
 const Role = require('../../lib/Role');
 
 describe('test role function', () => {
@@ -14,15 +13,15 @@ describe('test role function', () => {
     const role = new Role('testRole');
     expect(() => {
       role.func = 1;
-    }).to.throw(TypeError, errors.ROLE_FUNC_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_FUNC_TYPE_ERROR);
     expect(() => {
       role.func = {};
-    }).to.throw(TypeError, errors.ROLE_FUNC_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_FUNC_TYPE_ERROR);
     expect(() => {
       role.func = [];
-    }).to.throw(TypeError, errors.ROLE_FUNC_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_FUNC_TYPE_ERROR);
     expect(() => {
       role.func = 'invalid';
-    }).to.throw(TypeError, errors.ROLE_FUNC_TYPE_ERROR);
+    }).to.throw(TypeError, Role.errors.ROLE_FUNC_TYPE_ERROR);
   });
 });

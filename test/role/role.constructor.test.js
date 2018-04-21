@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const errors = require('../../lib/errors');
 const Role = require('../../lib/Role');
 
 describe('test role constructor', () => {
@@ -10,7 +9,7 @@ describe('test role constructor', () => {
   it('should throw Error ROLE_NAME_REQUIRED', () => {
     expect(() => {
       const role = new Role();
-    }).to.throw(Error, errors.ROLE_NAME_REQUIRED);
+    }).to.throw(Error, Role.errors.ROLE_NAME_REQUIRED);
   });
   it('should instanciate a Role with default values', () => {
     const role = new Role('roleName');

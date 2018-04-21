@@ -1,5 +1,4 @@
 const { expect } = require('chai');
-const errors = require('../../lib/errors');
 const Role = require('../../lib/Role');
 
 describe('test role static isValid', () => {
