@@ -19,4 +19,11 @@ describe('test roleList constructor', () => {
     expect(roleList.getRole('role1')).to.be.an.instanceof(Role);
     expect(roleList.getRole('role2')).to.be.an.instanceof(Role);
   });
+  it('should embed a static getter for Role Class', () => {
+    expect(RoleList.Role.name).to.equal('Role');
+  });
+  it('should embed a static getter for errors', () => {
+    expect(RoleList.errors).to.be.an.instanceof(Object);
+    expect(Object.keys(RoleList.errors).length > 0).to.equal(true);
+  });
 });
