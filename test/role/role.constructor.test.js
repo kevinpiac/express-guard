@@ -16,4 +16,13 @@ describe('test role constructor', () => {
     expect(role.features).to.deep.equal([]);
     expect(role.func).to.equal(null);
   });
+  it('should instanciate a Role with all values', () => {
+    const roleName = 'roletest';
+    const func = () => 3;
+    const features = ['ft1', 'ft2'];
+    const role = new Role(roleName, func, features);
+    expect(role.name).to.equal(roleName);
+    expect(role.func()).to.equal(func());
+    expect(role.features).to.deep.equal(features);
+  });
 });
