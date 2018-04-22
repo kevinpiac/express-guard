@@ -13,7 +13,6 @@ describe('test guard constructor', () => {
     expect(guard.roles).to.be.an.instanceOf(RoleList);
   });
   it('should embed a Role class as static getter', () => {
-    const role = new Guard.Role('name');
-    expect(role).to.be.an.instanceOf(Role);
+    expect(Guard.Role.name).to.equal('Role');
   });
 });
