@@ -2,23 +2,24 @@ const { expect } = require('chai');
 const Role = require('../../lib/Role');
 
 describe('test role function', () => {
-  it('should trigger the role func', () => {
-    const role = new Role('testRole');
-    const expected = 'Hello World!';
-    role.func = (param) => `${param} World!`;
-    const output = role.checkRole('Hello');
-    expect(output).to.equal(expected);
-  });
-  it('should call role.func (without arg)', () => {
+  it('should call role.func (without arg)', async () => {
     const role = new Role('role1', { func: () => 'hello' });
-    expect(role.checkRole()).to.equal('hello');
+    const result = await role.checkRole();
+    expect(result).to.equal('hello');
   });
-  it('should call role.func (with arg)', () => {
-    const role = new Role('role1', { func: (arg) => `hello ${arg}` });
-    expect(role.checkRole('world!')).to.equal('hello world!');
+  it('should call role.func (with arg)', async () => {
+    const role = new Role('role1', { func: (arg) => arg });
+    const result = await role.checkRole('42');
+    expect(result).to.equal('42');
   });
-  it('should work with many args', () => {
+  it('should work with many args', async() => {
     const role = new Role('role1', { func: (arg1, arg2) => `${arg1} ${arg2}` });
-    expect(role.checkRole('hello', 'world!')).to.equal('hello world!');
+    const result = await role.checkRole('hello', 'world!');
+    expect(result).to.equal('hello world!');
+  });
+  it('should work with async function', async () => {
+    const role = new Role('role1', { func: (arg1) => Promise.resolve(arg1) });
+    const result = await role.checkRole('42');
+    expect(result).to.equal('42');
   });
 });
