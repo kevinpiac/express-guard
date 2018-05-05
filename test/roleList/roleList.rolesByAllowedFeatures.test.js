@@ -32,6 +32,18 @@ describe('test roleList rolesByAllowedFeatures', () => {
       role1,
     ]);
   });
-  // it should throw an error without arg
-  // it should throw an error with bad args
+  it('should throw Error INVALID_FEATURE_LIST', () => {
+    const roleList = new RoleList();
+    const role1 = new Role('role1', {
+      can: ['feature1', 'feature2'],
+    });
+    const role2 = new Role('role2', {
+      can: ['feature3', 'feature4'],
+    });
+    roleList.addRole(role1);
+    roleList.addRole(role2);
+    expect(() => {
+      roleList.getRolesByFeatures({});
+    }).to.throw(Error, RoleList.errors.INVALID_FEATURE_LIST);
+  });
 });
