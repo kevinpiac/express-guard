@@ -28,4 +28,8 @@ describe('test role constructor', () => {
     expect(role.func()).to.equal(func());
     expect(role.features).to.deep.equal(features);
   });
+  it('should have an errors static getter', () => {
+    expect(Role.errors).to.be.an('object');
+    expect(Role.errors.ROLE_NAME_REQUIRED).to.be.a('string');
+  });
 });
