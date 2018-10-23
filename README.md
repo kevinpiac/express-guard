@@ -25,7 +25,11 @@ const authenticated = new Guard.Role('authenticated', {
   can: ['viewPost', 'editPost', 'logout'],
   func: async (req) => {
     // Perform some logic to compute your role policy.
-    return Promise.resolve(true);
+    const result = await Promise.resolve('someresult');
+    if (result === 'someresult') {
+      return true; // will have role 'authenticated'
+    }
+    return false; // will not match this role
   },
 })
 
@@ -35,7 +39,8 @@ const guest = new Guard.Role('guest', {
     // because we define roles one by one, we can use
     // a previously defined role to compute this one.
     // Here a guest is someone who is not authenticated.
-    return !authenticated.func(req);
+    const res = await !authenticated.func(req);
+    return res;
   },
 })
 
@@ -77,11 +82,10 @@ guard.requireAny('viewPost', '*'),
 });
 
 // example 2
-// regarding our config,
-// only admin has access to this route
-router.delete('/posts/:postId', [
-  guard.requireAll('removePost', '*'),
-], (req, res) => {
+// regarding our config, only admin has access to this route
+router.delete('/posts/:postId',
+guard.requireAny('removePost', '*'),
+(req, res) => {
   // your route handler
 });
 ```

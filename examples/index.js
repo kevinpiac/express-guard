@@ -1,8 +1,7 @@
 const express = require('express');
 const app = express();
 
-// TODO : replace require with package link
-const Guard = require('../lib');
+const Guard = require('express-guard');
 const guard = new Guard();
 
 const anyone = new Guard.Role('anyone', {
