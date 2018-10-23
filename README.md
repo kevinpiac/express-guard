@@ -1,8 +1,8 @@
 # Express Guard
 
 
-[![Build Status](https://travis-ci.org/kevinpiac/express-guard.svg?branch=dev)](https://travis-ci.org/kevinpiac/express-guard)
-[![Coverage Status](https://coveralls.io/repos/github/kevinpiac/express-guard/badge.svg?branch=dev)](https://coveralls.io/github/kevinpiac/express-guard?branch=dev)
+[![Build Status](https://travis-ci.org/kevinpiac/express-guard.svg?branch=master)](https://travis-ci.org/kevinpiac/express-guard)
+[![Coverage Status](https://coveralls.io/repos/github/kevinpiac/express-guard/badge.svg?branch=master)](https://coveralls.io/github/kevinpiac/express-guard?branch=dev)
 
 <p align="center">
   <img src="logo.jpg">
