@@ -1,6 +1,6 @@
 {
   "name": "express-guard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A powerful, operation based, access and permission middleware for Express.",
   "main": "./lib",
   "scripts": {
