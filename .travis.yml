@@ -1,0 +1,12 @@
+language: node_js
+sudo: yes
+
+node_js:
+  - '9'
+install:
+  - npm install
+script: 'npm run test'
+
+# coveralls
+after_script:
+  - 'npm run coveralls'
