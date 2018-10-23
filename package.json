@@ -6,7 +6,7 @@
   "scripts": {
     "eslint": "eslint --cache --fix --format codeframe .",
     "mocha": "mocha --recursive",
-    "cover": "istanbul --include-all-sources cover _mocha --report lcovonly -- -R dot --recursive test/",
+    "cover": "istanbul --include-all-sources cover -x 'examples/*.*' _mocha --report lcovonly -- -R dot --recursive test/",
     "coveralls": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
     "test": "run-s eslint mocha cover"
   },

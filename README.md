@@ -8,10 +8,11 @@
   <img src="logo.jpg">
 </p>
 
-Express Guard (express-guard) allows you to manage the requests made to your express server. It's built to be simple and has a powerful syntax. With Express Guard, you only have to define allowed Features (such as 'viewPosts', 'removePost'...) for different user Roles (such as 'admin', 'postOwner'). Then when a request is made to your server, the middleware will check the corresponding access policy and return a result based on the user's permissions.
+Express Guard (express-guard) allows you to manage the requests made to your express server. It's built to be simple and has a powerful syntax.
 
+With Express Guard, you only have to define allowed Features (such as 'viewPosts', 'removePost'...) for different user Roles (such as 'admin', 'postOwner').
 
-### STATUS: Under active development
+Then when a request is made to your server, the middleware will check the corresponding access policy and return a result based on the user's permissions.
 
 ## Getting started
 
@@ -22,16 +23,27 @@ const Guard = require('express-guard');
 
 const authenticated = new Guard.Role('authenticated', {
   can: ['viewPost', 'editPost', 'logout'],
-  func(req) {
-    return !!(req.user.id);
+  func: async (req) => {
+    // Perform some logic to compute your role policy.
+    return Promise.resolve(true);
   },
 })
 
-// because we define roles one by one, we can use
-// role defined above to calculate this one...
-const anyone = new Guard.Role('anyone', {
-  can: ['login'],
-  func(req) { return authenticated.func(req); },
+const guest = new Guard.Role('guest', {
+  can: ['login'], // they can't do anything except login
+  func: async (req) => {
+    // because we define roles one by one, we can use
+    // a previously defined role to compute this one.
+    // Here a guest is someone who is not authenticated.
+    return !authenticated.func(req);
+  },
+})
+
+// Because we define roles one by one, we can use
+// a previously defined role to compute this one.
+const admin = new Guard.Role('admin', {
+  can: ['*'], // An admin can do everything!
+  func(req) { return unauthenticated.func(req); },
 });
 
 ```
@@ -41,34 +53,34 @@ const anyone = new Guard.Role('anyone', {
 ```js
 const guard = new Guard();
 
-// add roles one by one
-guard.roles.addRole(anyone);
+// Add roles one by one
 guard.roles.addRole(authenticated);
+guard.roles.addRole(admin);
 
 
-// or using an array
-guard.roles = [anyone, authenticated];
+// Or using an array
+guard.roles = [authenticated, admin];
 ```
 
-#### 3. Use the guard middlewares
+#### 3. Use guard middleware
 ```js
 const app = express();
 const router = express.Router();
 
 // example 1
-// we allow access only if user
-// has roles allowing to viewPost OR editPost
-router.get('/posts', [
-  guard.requireAny('viewPost', 'editPost'),
-], (req, res) => {
+// regarding our config both admin and authenticated users
+// have access to this route.
+router.get('/posts',
+guard.requireAny('viewPost', '*'),
+(req, res) => {
   // your route handler
 });
 
 // example 2
-// we allow access only if user
-// has roles allowing to viewPost AND editPost
-router.get('/posts', [
-  guard.requireAll('viewPost', 'editPost'),
+// regarding our config,
+// only admin has access to this route
+router.delete('/posts/:postId', [
+  guard.requireAll('removePost', '*'),
 ], (req, res) => {
   // your route handler
 });
