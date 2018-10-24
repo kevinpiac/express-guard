@@ -62,6 +62,7 @@ describe('test guard middleware requireAny', () => {
     const res = await middleware(request, response, next);
     expect(res).to.be.an('Error');
     expect(res.message).to.equal(Guard.errors.FORBIDDEN);
+    expect(res.isGuard).to.be.true;
   });
 
   it('should call next with Error FORBIDDEN (two features)', async () => {
@@ -69,6 +70,7 @@ describe('test guard middleware requireAny', () => {
     const res = await middleware(request, response, next);
     expect(res).to.be.an('Error');
     expect(res.message).to.equal(Guard.errors.FORBIDDEN);
+    expect(res.isGuard).to.be.true;
   });
 
   it('should call next with Error FORBIDDEN (async role involved)', async () => {
@@ -76,6 +78,7 @@ describe('test guard middleware requireAny', () => {
     const res = await middleware(request, response, next);
     expect(res).to.be.an('Error');
     expect(res.message).to.equal(Guard.errors.FORBIDDEN);
+    expect(res.isGuard).to.be.true;
   });
 
 });

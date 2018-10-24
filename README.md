@@ -89,3 +89,25 @@ guard.requireAny('removePost', '*'),
   // your route handler
 });
 ```
+
+### Error handling
+
+Since Guard acts as a middleware it calls `next(err)`.
+The `err` argument is nothing but an `Error()` instance.
+
+This instance contains a property called `isGuard` which is a Boolean. It can help you to catch the error in an error handler middleware as follow:
+
+``` js
+// Your error handler file
+const errorHandler = (err, req, res, next) => {
+  if (err.isGuard) {
+    // custom logic if error comes from Guard.
+    // Yout want probably send a forbidden status
+    // with a custom message. Something like:
+    // res.status = 403;
+    // res.send({ message: 'You can not access this ressource' });
+  }
+  // Other stuff here.
+};
+
+```
